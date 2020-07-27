@@ -9,12 +9,14 @@ var port = 3000;
 
 var app = express();
 
+require('dotenv').config();
+
 app.set('view engine', 'pug')
 app.set('views', './views')
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-app.use(cookieParser("secret"));
+app.use(cookieParser(process.env.SECRET_Cookie));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => { res.render('index', { name: 'kienz' }) });
