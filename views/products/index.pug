@@ -1,0 +1,33 @@
+extends ../layouts/common.pug
+block content
+    .d-flex
+        h1 Products
+        nav(aria-label='Page navigation example',style="margin-left: 705px;").page
+            ul.pagination.justify-content-center
+                li.page-item.disabled
+                    a.page-link(href='#' tabindex='-1' aria-disabled='true') Previous
+                li.page-item
+                    a.page-link(href='?page=1') 1
+                li.page-item
+                    a.page-link(href='?page=2') 2
+                li.page-item
+                    a.page-link(href='?page=3') 3
+                li.page-item
+                    a.page-link(href='/') Next
+
+
+    .d-flex.align-items-center.mb-3
+      form.ml-auto(action = "/products/search" ,method ="GET", class = "d-flex")
+        input(type = "text",name = "q", class = "form-control")
+        Button(class= "btn btn-primary ml-2") Search
+
+    .row
+        each product in products
+            .col-sm-6.col-md-4.col-lg-3
+                .card.mb-3
+                    img.card-img-top(src= product.image)
+                    .card-body(style="height:270px")
+                        h5.card-title= product.name
+                        p.card-text= product.description
+                        .protect
+                            a.btn.btn-primary(href="/cart/add/" + product.id , style="position: absolute; top: 400px;") Add to cart
