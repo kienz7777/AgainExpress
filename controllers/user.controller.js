@@ -46,15 +46,20 @@ module.exports.get = (req,res) => {
 module.exports.postCreate = (req, res) =>{
     
     req.body.id = shortid.generate();
+    req.body.avatar = req.file.path.split('\\').slice(1).join('/');
+    //req.body.avatar = req.file.path;
 
     var count = 0;
+    req.body = JSON.parse(JSON.stringify(req.body));
+   
     for( var key in req.body ) {
         if( req.body.hasOwnProperty(key) ) {
             ++count;
         }
     }
 
-    if(req.body.id && req.body.name && req.body.phone && count == 3){
+
+    if(req.body.id && req.body.name && req.body.phone && req.body.avatar && count == 4){
         db.get('users').push(req.body).write();
         res.redirect('/users');
     }

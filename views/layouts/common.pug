@@ -21,8 +21,10 @@ html(lang="en")
                 a.nav-link(href='/products') Products  
             li.nav-item(style= "list-style: none;")
                 a.nav-link(href='/products') Cart
-        if user     
-            p= user.name    
+            if numberCart
+               p(style= "position: relative; right: 10px; color: red;")= numberCart
+        if userName     
+            p= userName   
       
         
         
